@@ -1,0 +1,12 @@
+{
+	"name": "${BRANCH}",
+	"package": "${BRANCH}",
+	"index": "${index.html}",
+	"icon32x32": "icon@2x.png",
+	"externalURL": "",
+	"selectors": {
+		"title": "Function"
+	},
+	"ignore": [
+	]
+}

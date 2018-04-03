@@ -1,0 +1,4 @@
+<entry>
+	<version>${VERSION}-${RELEASE}</version>
+	<url>http://github.com/Eremiell/mandash/releases/download/${BRANCH}-${VERSION}-${RELEASE}/${BRANCH}.tgz</url>
+</entry>

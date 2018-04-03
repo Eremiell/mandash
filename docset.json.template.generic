@@ -1,0 +1,17 @@
+{
+    "name": "${BRANCH}",
+    "version": "${VERSION}-${RELEASE}",
+    "archive": "${BRANCH}.tgz",
+    "author": {
+        "name": "Jakub 'Eremiell' Marek",
+        "link": "https://twitter.com/Eremiell"
+    },
+    "aliases": [],
+
+    "specific_versions": [
+        { 
+            "version": "${VERSION}-${RELEASE}",
+            "archive": "versions/${VERSION}-${RELEASE}/${BRANCH}.tgz",
+        }
+    ]
+}

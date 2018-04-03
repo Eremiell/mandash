@@ -1,0 +1,10 @@
+${BRANCH} Docset
+=======================
+
+* I'm [Jakub 'Eremiell' Marek](https://twitter.com/Eremiell)
+* Complete instructions on how to generate the docset:
+  * [List of prerequisites](https://github.com/Eremiell/mandash/blob/${BRANCH}/Brewfile)
+  * [Initial man documentation for the docset](https://github.com/${BRANCH}/${BRANCH}/tree/${VERSION})
+  * [How to run the generation script](https://github.com/Eremiell/mandash/blob/${BRANCH}/.travis.yml)
+  * The docset is built automaticaly from ${BRANCH} GitHub repo checked out on latest release, and built via man2html and dashing on Travis, then deployed back to GitHub
+* Early testing build, feedback welcome!

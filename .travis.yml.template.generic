@@ -1,0 +1,45 @@
+language: cpp
+os: osx
+osx_image: xcode9.2
+branches:
+  only:
+  - ${BRANCH}
+
+before_install:
+  - brew update && brew bundle
+
+install:
+  - git clone https://github.com/${BRANCH}/${BRANCH}.git
+  - cd ${BRANCH}
+  - git checkout ${VERSION}
+
+before_script:
+
+script:
+  - mkdir html
+  - cd man-pages
+  - ls man[0-9]/* | while read line; do name=${line##*/}; name=${name%.*}; groff -man -Tutf8 ${line} | man2html -title ${name} -topm 0 -botm 0 -cgiurl \${title}.html > ../html/${name}.html; sed -i -E s/"<([^>]*)>"/"<\L\1>"/g ../html/${name}.html; sed -i -E s/"^([[:upper:]][[:alpha:] ]+)$"/"<h2>\1<\/h2>"/ ../html/${name}.html; sed -i -E s/"^(<title>.*)$"/"<meta charset=\"UTF-8\">\n\1"/ ../html/${name}.html; done
+
+before_deploy:
+  - cd ../html
+  - wget ${http://icon.png}
+  - convert ${icon.png} -resize 16x16! icon.png
+  - convert ${icon.png} -resize 32x32! icon@2x.png
+  - cp ../dashing.json .
+  - dashing build ${BRANCH}
+  - tar --exclude='.DS_Store' -cvzf ${BRANCH}.tgz ${BRANCH}.docset
+
+deploy:
+  provider: releases
+  api_key: "GITHUB OAUTH TOKEN"
+  file:
+    - "${BRANCH}/html/${BRANCH}.tgz"
+    - "${BRANCH}/html/icon.png"
+    - "${BRANCH}/html/icon@2x.png"
+    - "docset.json"
+    - "README.md"
+    - "${BRANCH}.xml"
+  skip_cleanup: true
+  on:
+    repo: Eremiell/mandash
+    tags: true
