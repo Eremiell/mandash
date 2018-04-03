@@ -1,0 +1,12 @@
+{
+	"name": "pthread",
+	"package": "pthread",
+	"index": "phreads.html",
+	"icon32x32": "icon@2x.png",
+	"externalURL": "",
+	"selectors": {
+		"title": "Function"
+	},
+	"ignore": [
+	]
+}

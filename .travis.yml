@@ -1,0 +1,45 @@
+language: cpp
+os: osx
+osx_image: xcode9.2
+branches:
+  only:
+  - pthread
+
+before_install:
+  - brew update && brew bundle
+
+install:
+  - git clone https://git.kernel.org/pub/scm/docs/man-pages/man-pages.git
+  - cd man-pages
+  - git checkout man-pages-
+
+before_script:
+
+script:
+  - mkdir html
+  - ls man[0-9]/* | while read line; do name=${line##*/}; name=${name%.*}; groff -man -Tutf8 ${line} | man2html -title ${name} -topm 0 -botm 0 -cgiurl \${title}.html > html/${name}.html; sed -i -E s/"<([^>]*)>"/"<\L\1>"/g html/${name}.html; sed -i -E s/"^([[:upper:]][[:alpha:] ]+)$"/"<h2>\1<\/h2>"/ html/${name}.html; sed -i -E s/"^(<title>.*)$"/"<meta charset=\"UTF-8\">\n\1"/ html/${name}.html; done
+
+before_deploy:
+  - cd html
+  - wget "http://www.opengroup.org/sites/default/files/eventthumb/open_o-blog.jpg"
+  - convert open_o-blog.jpg -resize 16x16! icon.png
+  - convert open_o-blog.jpg -resize 32x32! icon@2x.png
+  - cp ../../dashing.json .
+  - dashing build pthread
+  - tar --exclude='.DS_Store' -cvzf pthread.tgz pthread.docset
+
+deploy:
+  provider: releases
+  api_key:
+    secure: xsQlAB+dYzHV4+k+imtwHsQE0Zp9jyhTBTFY3ry8bhECGlKL5VnP5wMNV/Jx3JvmShinMIqbl6JTiFPZ4/8ivkXYT15uKhpajVwO3IloNk2SLOGPQjDzcaSQdS50T9CZEf3ctNL44OzVHuQ+6Ak/E1EvFz1e09gu/hSByu5u+U9gblg+2R2kP63CHZNUst0qG4qfwlb0bo41ZVoH+wEnKdcPfRrwPdcrwRFgZ6eYWRpsGFgiokH/XdW7a3PZfjRZx3jHvqXUZoExvaF+bRTcR+/h/CUjYBfrQo4on1+RNod+foUZ/PdhTUe10VTRYX7TXKgccBWUVqcMKT9wUE/EXl/F79TnNhwf382qXr3y/nyVtYfN3X/pmDVlS9ci+CvmGe/ul5P+L7SQXi6Ua7uxQ4keE4N3ASPbyPjd2bTCH6AFLcXHtGfP5fzLk8T7NB2GlH7BbOyavk+Xa5IK2vH8pfwV8nrlmCiTxDE8Jwa2SEucZzRcdlBduEBV9ZDSBnP14Nw6s5OiYcdVhS2BbEgxl0kaZ6GK4uSJRbEHYepvpPfRKkF59ri2iYJjmyiga3GxsNKn2p7vNYmWMjTNYCcmpljVgcrbbjMXeSJgbb3qP5+DQz3oebVts+gIURt2WMHW2VSsVhIDONWTnhyvm5O03y1accAKgf4akRXtclD3hAo=
+  file:
+    - "man-pages/html/pthread.tgz"
+    - "man-pages/html/icon.png"
+    - "man-pages/html/icon@2x.png"
+    - "docset.json"
+    - "README.md"
+    - "pthread.xml"
+  skip_cleanup: true
+  on:
+    repo: Eremiell/mandash
+    tags: true
