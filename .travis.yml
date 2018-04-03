@@ -11,7 +11,7 @@ before_install:
 install:
   - git clone https://git.kernel.org/pub/scm/docs/man-pages/man-pages.git
   - cd man-pages
-  - git checkout man-pages-
+  - git checkout man-pages-4.14
 
 before_script:
 
