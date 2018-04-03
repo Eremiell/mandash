@@ -31,7 +31,8 @@ before_deploy:
 
 deploy:
   provider: releases
-  api_key: "GITHUB OAUTH TOKEN"
+  api_key:
+    secure: xsQlAB+dYzHV4+k+imtwHsQE0Zp9jyhTBTFY3ry8bhECGlKL5VnP5wMNV/Jx3JvmShinMIqbl6JTiFPZ4/8ivkXYT15uKhpajVwO3IloNk2SLOGPQjDzcaSQdS50T9CZEf3ctNL44OzVHuQ+6Ak/E1EvFz1e09gu/hSByu5u+U9gblg+2R2kP63CHZNUst0qG4qfwlb0bo41ZVoH+wEnKdcPfRrwPdcrwRFgZ6eYWRpsGFgiokH/XdW7a3PZfjRZx3jHvqXUZoExvaF+bRTcR+/h/CUjYBfrQo4on1+RNod+foUZ/PdhTUe10VTRYX7TXKgccBWUVqcMKT9wUE/EXl/F79TnNhwf382qXr3y/nyVtYfN3X/pmDVlS9ci+CvmGe/ul5P+L7SQXi6Ua7uxQ4keE4N3ASPbyPjd2bTCH6AFLcXHtGfP5fzLk8T7NB2GlH7BbOyavk+Xa5IK2vH8pfwV8nrlmCiTxDE8Jwa2SEucZzRcdlBduEBV9ZDSBnP14Nw6s5OiYcdVhS2BbEgxl0kaZ6GK4uSJRbEHYepvpPfRKkF59ri2iYJjmyiga3GxsNKn2p7vNYmWMjTNYCcmpljVgcrbbjMXeSJgbb3qP5+DQz3oebVts+gIURt2WMHW2VSsVhIDONWTnhyvm5O03y1accAKgf4akRXtclD3hAo=
   file:
     - "${BRANCH}/html/${BRANCH}.tgz"
     - "${BRANCH}/html/icon.png"
