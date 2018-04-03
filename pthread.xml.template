@@ -1,0 +1,4 @@
+<entry>
+	<version>${VERSION}-${RELEASE}</version>
+	<url>http://github.com/Eremiell/mandash/releases/download/pthread-${VERSION}-${RELEASE}/pthread.tgz</url>
+</entry>
