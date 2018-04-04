@@ -1,6 +1,6 @@
 {
     "name": "pthread",
-    "version": "4.14-b7",
+    "version": "4.14-b8",
     "archive": "pthread.tgz",
     "author": {
         "name": "Jakub 'Eremiell' Marek",
@@ -10,8 +10,8 @@
 
     "specific_versions": [
         { 
-            "version": "4.14-b7",
-            "archive": "versions/4.14-b7/pthread.tgz",
+            "version": "4.14-b8",
+            "archive": "versions/4.14-b8/pthread.tgz",
         }
     ]
 }
