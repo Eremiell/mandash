@@ -43,4 +43,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: Eremiell/mandash
-    tags: true
+    branch: ${BRANCH}
