@@ -27,6 +27,8 @@ before_deploy:
   - convert ${icon.png} -resize 32x32! icon@2x.png
   - cp ../dashing.json .
   - dashing build ${BRANCH}
+  - cp icon.png ${BRANCH}.docset
+  - cp icon@2x.png ${BRANCH}.docset
   - tar --exclude='.DS_Store' -cvzf ${BRANCH}.tgz ${BRANCH}.docset
 
 deploy:
