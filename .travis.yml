@@ -27,6 +27,7 @@ before_deploy:
   - cp ../../dashing.json .
   - dashing build pthread
   - tar --exclude='.DS_Store' -cvzf pthread.tgz pthread.docset
+  - cd ../..
 
 deploy:
   provider: releases
