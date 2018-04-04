@@ -17,7 +17,8 @@ before_script:
 
 script:
   - mkdir html
-  - for prefix in pthread sem fork wait; do ls man[0-9]/${prefix}* | while read line; do name="${line##*/}"; name="${name%.*}"; groff -man -Tutf8 ${line} | man2html -title ${name} -topm 0 -botm 0 -cgiurl "\${title}.html" > "html/${name}.html"; sed -E -i -- "s/<([^>]*)>/<\L\1>/g" "html/${name}.html"; sed -E -i -- "s/^([A-Z][A-Za-z ]+)$/<h2>\1<\/h2>/" "html/${name}.html"; sed -E -i -- "s/^(<title>.*)$/<meta charset=\"UTF-8\">\n\1/" "html/${name}.html"; done; done
+  - for prefix in pthread sem fork wait; do ls man[0-9]/${prefix}* | while read line; do name="${line##*/}"; name="${name%.*}"; groff -man -Tutf8 ${line} | man2html -title ${name} -topm 0 -botm 0 -cgiurl "\${title}.html" > "html/${name}.html"; sed -E -i .bk "s/<([^>]*)>/<\L\1>/g" "html/${name}.html"; sed -E -i .bk "s/^([A-Z][A-Za-z ]+)$/<h2>\1<\/h2>/" "html/${name}.html"; sed -E -i .bk "s/^(<title>.*)$/<meta charset=\"UTF-8\">\n\1/" "html/${name}.html"; done; done
+  - rm *.bk
 
 before_deploy:
   - cd html
@@ -26,6 +27,8 @@ before_deploy:
   - convert open_o-blog.jpg -resize 32x32! icon@2x.png
   - cp ../../dashing.json .
   - dashing build pthread
+  - cp icon.png pthread.docset
+  - cp icon@2x.png pthread.docset
   - tar --exclude='.DS_Store' -cvzf pthread.tgz pthread.docset
   - cd ../..
 
