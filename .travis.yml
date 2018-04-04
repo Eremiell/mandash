@@ -17,7 +17,7 @@ before_script:
 
 script:
   - mkdir html
-  - for prefix in pthread sem fork wait; do ls man[0-9]/${prefix}* | while read line; do name="${line##*/}"; name="${name%.*}"; groff -man -Tutf8 ${line} | man2html -title ${name} -topm 0 -botm 0 -cgiurl "\${title}.html" > "html/${name}.html"; sed -i "s/<\([^>]*\)>/<\L\1>/g" "html/${name}.html"; sed -i "s/^\([A-Z][A-Za-z ]\+\)$/<h2>\1<\/h2>/" "html/${name}.html"; sed -i "s/^\(<title>.*\)$/<meta charset=\"UTF-8\">\n\1/" "html/${name}.html"; done; done
+  - for prefix in pthread sem fork wait; do ls man[0-9]/${prefix}* | while read line; do name="${line##*/}"; name="${name%.*}"; groff -man -Tutf8 ${line} | man2html -title ${name} -topm 0 -botm 0 -cgiurl "\${title}.html" > "html/${name}.html"; sed -i"" -E "s/<([^>]*)>/<\L\1>/g" "html/${name}.html"; sed -i"" -E "s/^([A-Z][A-Za-z ]+)$/<h2>\1<\/h2>/" "html/${name}.html"; sed -i"" -E "s/^(<title>.*)$/<meta charset=\"UTF-8\">\n\1/" "html/${name}.html"; done; done
 
 before_deploy:
   - cd html
